@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Assignment_2;
 
@@ -16,60 +15,45 @@ class PartB
 
         BinarySearchTime(times, 0, times.Count - 1);
     }
-    public static int CompareTimes(String time1, String time2)
+    public static int CompareTimes(String goal, String time)
     {
-        String[] time1Full = time1.Split(':');
-        String[] time2Full = time2.Split(":");
+        String[] splitGoal = goal.Split(':');
+        String[] splitTime = time.Split(":");
 
         for (int i = 0; i < 3; i++)
         {
-            int time1Time = int.Parse(time1Full[i]);
-            int time2Time = int.Parse(time2Full[i]);
+            int goalTime = int.Parse(splitGoal[i]);
+            int timeTime = int.Parse(splitTime[i]);
 
-            if (time1Time < time2Time)
+            if (timeTime < goalTime)
                 return -1;
-            else if (time1Time >= time2Time)
+            else if (timeTime >= goalTime)
                 return 1;
         }
 
-        return -1;
+        return 1;
     }
 
     public static void BinarySearchTime(List<String> list, int start, int end)
     {
-        int mid = (end + start) / 2;
-        
-        if (mid == end)
+        int mid = start + (end - start) / 2;
+        if (start == end)
         {
-            if ((end - 2) == int.Parse(list[0]))
+            if (CompareTimes(list[1], list[mid]) == -1)
             {
-                Console.WriteLine("OK");
+                if ((mid - 2) == int.Parse(list[0]))
+                {
+                    Console.WriteLine("OK");
+                }
+                else
+                {
+                    Console.WriteLine("Problem");
+                }
             }
-            else
-            {
-                Console.WriteLine("Problem");
-            }
-
-            return;
         }
-        else if (mid == start)
+        else if (CompareTimes(list[1], list[mid]) == -1)
         {
-            Console.WriteLine("Problem");
-            return;
-        }
-        else if (CompareTimes(list[mid], list[1]) == -1 && CompareTimes(list[mid + 1], list[1]) == 1)
-        {
-            if ((mid - 2) == int.Parse(list[0]))
-            {
-                Console.WriteLine("OK");
-            }
-
-            Console.WriteLine("Problem");
-            return;
-        }
-        else if (CompareTimes(list[mid], list[1]) == 1)
-        {
-            BinarySearchTime(list, start, mid - 1);
+            BinarySearchTime(list, start, mid);
         }
         else
         {
@@ -78,5 +62,5 @@ class PartB
     }
 
 
-
+    
 }
