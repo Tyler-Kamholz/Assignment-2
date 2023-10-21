@@ -9,8 +9,9 @@ class Program
     {
         PartC partC = new();
         PartB partB = new();
+        PartD partD = new();
 
-        PartB.Run();
+        partD.Run();
     }
 
 }
