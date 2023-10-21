@@ -8,8 +8,9 @@ class Program
     static void Main(string[] args)
     {
         PartC partC = new();
+        PartB partB = new();
 
-        partC.Run();
+        PartB.Run();
     }
 
 }
