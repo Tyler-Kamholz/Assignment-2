@@ -28,7 +28,7 @@ class PartB
 
             if (time1Time < time2Time)
                 return -1;
-            else if (time1Time >= time2Time)
+            else if (time1Time > time2Time)
                 return 1;
         }
 
@@ -37,13 +37,14 @@ class PartB
 
     public static void BinarySearchTime(List<String> list, int start, int end)
     {
-        int mid = (end + start) / 2;
+        int mid = start + (end - start) / 2;
         
-        if (mid == end)
+        if (mid >= end)
         {
             if ((end - 2) == int.Parse(list[0]))
             {
                 Console.WriteLine("OK");
+                return;
             }
             else
             {
@@ -52,16 +53,17 @@ class PartB
 
             return;
         }
-        else if (mid == start)
+        else if (mid <= start)
         {
             Console.WriteLine("Problem");
             return;
         }
         else if (CompareTimes(list[mid], list[1]) == -1 && CompareTimes(list[mid + 1], list[1]) == 1)
         {
-            if ((mid - 2) == int.Parse(list[0]))
+            if ((mid - 1) == int.Parse(list[0]))
             {
                 Console.WriteLine("OK");
+                return;
             }
 
             Console.WriteLine("Problem");
@@ -69,14 +71,12 @@ class PartB
         }
         else if (CompareTimes(list[mid], list[1]) == 1)
         {
-            BinarySearchTime(list, start, mid - 1);
+            BinarySearchTime(list, start, mid);
         }
         else
         {
             BinarySearchTime(list, mid, end);
         }
     }
-
-
 
 }
