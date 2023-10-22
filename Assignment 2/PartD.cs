@@ -115,6 +115,9 @@ public class PartD
         Console.WriteLine($"{bestVal} {bestStart} {bestStop}");
     }
 
+    /// <summary>
+    /// The Brute Force method of finding highest
+    /// </summary>
     public void BruteForce()
     {
         int largest = 0;
